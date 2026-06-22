@@ -12,7 +12,7 @@
 
 => React Native allows you to build Android and iOS mobile apps using JavaScript and React.
 
-## 2. React Native uses:
+## 2. Using React Native:
 
 ```
     <View>
@@ -87,6 +87,9 @@ npm run reset-project
 ## 4. Image
 
 ```
+    import { Image } from "react-native";
+```
+```
     <Image
       source={{
         uri: "https://picsum.photos/200"
@@ -115,6 +118,10 @@ npm run reset-project
 ## 7. ScrollView
 
 ```
+    import { ScrollView } from "react-native";
+```
+
+```
     <ScrollView>
       <Text>Item 1</Text>
       <Text>Item 2</Text>
@@ -125,7 +132,8 @@ npm run reset-project
 
 ```
     import { Link } from "expo-router";
-
+```
+```
     <Link href={"/about"}>About Screen</Link>
 ```
 
@@ -195,11 +203,52 @@ npm run reset-project
         </Stack>
       );
     }
-
 ```
 
 ```
     <Stack screenOptions={{ headerShown: false }}>...</Stack>
+```
+
+## 2. index.tsx
+
+```
+    import { Text, View, StyleSheet } from "react-native";
+    import { Link } from "expo-router";
+
+    export default function Index() {
+      return (
+        <View style={styles.container}>
+          <Text>Edit app/index.tsx to edit this screen.</Text>
+          <Link href="/about">Visit About Screen</Link>
+        </View>
+      );
+    }
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        alignItems: "center",
+      },
+    });
+
+```
+
+## 3. about.tsx
+```
+    import { View, Text } from "react-native";
+    import React from "react";
+
+    const About = () => {
+      return (
+        <View>
+          <Text>About Screen</Text>
+        </View>
+      );
+    };
+
+    export default About;
 ```
 
 ---
@@ -330,4 +379,29 @@ app/
         </Tabs>
       );
     }
+```
+
+## 4. Home Screen - app/(tabs)/index.tsx
+```
+    import { View, Text, StyleSheet } from "react-native";
+
+    export default function HomeScreen() {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text}>Home Screen</Text>
+        </View>
+      );
+    }
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      text: {
+        fontSize: 24,
+        fontWeight: "bold",
+      },
+    });
 ```
