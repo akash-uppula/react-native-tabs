@@ -1,50 +1,333 @@
-# Welcome to your Expo app 👋
+### React Native
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+# 1. Foundations
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## 1. What is React Native?
 
-   ```bash
-   npx expo start
-   ```
+=> React Native allows you to build Android and iOS mobile apps using JavaScript and React.
 
-In the output, you'll find options to open the app in a
+## 2. React Native uses:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+```
+    <View>
+      <Text>Hello</Text>
+      <Button title="Click" />
+    </View>
+```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 3. | React Web | React Native |
 
-## Get a fresh project
+```
+| React Web | React Native      |
+| --------- | ----------------- |
+| div       | View              |
+| p, h1     | Text              |
+| button    | Button            |
+| CSS       | StyleSheet        |
+| Browser   | Mobile App        |
+| ReactDOM  | Native Components |
+```
 
-When you're ready, run:
+## 4. What is Expo?
 
-```bash
+=> Expo is a framework that makes React Native development easier.
+
+## 5. Installation
+
+```
+npx create-expo-app@latest
+npm run start
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+# 2. React Native Core Components
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 1. First React Native Component - app/index.js
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+    import { View, Text } from "react-native";
+
+    export default function Home() {
+      return (
+        <View>
+          <Text>Hello React Native!</Text>
+        </View>
+      );
+    }
+```
+
+## 2. Text
+
+```
+    <Text>Hello World</Text>
+```
+
+## 3. View
+
+```
+    <View>
+      <Text>Inside View</Text>
+    </View>
+```
+
+## 4. Image
+
+```
+    <Image
+      source={{
+        uri: "https://picsum.photos/200"
+      }}
+      style={{ width: 200, height: 200 }}
+    />
+```
+
+## 5. Button
+
+```
+    <Button
+      title="Click Me"
+      onPress={() => alert("Clicked")}
+    />
+```
+
+## 6. TextInput
+
+```
+    <TextInput
+      placeholder="Enter name"
+    />
+```
+
+## 7. ScrollView
+
+```
+    <ScrollView>
+      <Text>Item 1</Text>
+      <Text>Item 2</Text>
+    </ScrollView>
+```
+
+## 8. Link
+
+```
+    import { Link } from "expo-router";
+
+    <Link href={"/about"}>About Screen</Link>
+```
+
+---
+
+---
+
+# 3. Styling
+
+---
+
+---
+
+## 1. No CSS files - Use StyleSheet.
+
+```
+    import { StyleSheet } from "react-native";
+
+    const styles = StyleSheet.create({
+      container: {
+        flex: 1,
+        backgroundColor: "#fff",
+        justifyContent: "center",
+        alignItems: "center"
+      }
+    });
+```
+
+```
+    <View style={styles.container}>...</View>
+    <View
+      style={{
+        flex: 1,
+        flexDirection: "row"
+      }}
+    >
+    ...
+    </View>
+```
+
+---
+
+---
+
+# 4. Navigation
+
+---
+
+---
+
+## 1. \_layout.tsx
+
+```
+    import { Stack } from "expo-router";
+
+    export default function RootLayout() {
+      return (
+        <Stack>
+          <Stack.Screen
+            name="index"
+            options={{ headerShown: true, title: "Home" }}
+          />
+          <Stack.Screen
+            name="about"
+            options={{ headerShown: true, title: "About" }}
+          />
+        </Stack>
+      );
+    }
+
+```
+
+```
+    <Stack screenOptions={{ headerShown: false }}>...</Stack>
+```
+
+---
+
+---
+
+# 5. Tab Navigator
+
+---
+
+---
+
+## 1. Folder Structure
+
+```
+app/
+│
+├── _layout.tsx
+│
+├── (tabs)/
+│   ├── _layout.tsx
+│   ├── index.tsx
+│   ├── profile.tsx
+│   └── settings.tsx
+```
+
+## 2. Root Layout - app/\_layout.tsx
+
+```
+    import { Stack } from "expo-router";
+
+    export default function RootLayout() {
+      return (
+        <Stack>
+          <Stack.Screen
+            name="(tabs)"
+            options={{ headerShown: false }}
+          />
+        </Stack>
+      );
+    }
+```
+
+## 3. Tab Layout - app/(tabs)/\_layout.tsx
+
+```
+    import { Tabs } from "expo-router";
+    import { Ionicons } from "@expo/vector-icons";
+
+    export default function TabsLayout() {
+      return (
+        <Tabs
+          screenOptions={{
+            headerShown: true,
+
+            tabBarActiveTintColor: "tomato",
+            tabBarInactiveTintColor: "gray",
+
+            tabBarStyle: {
+              position: "absolute",
+              left: 15,
+              right: 15,
+              bottom: 0,
+
+              backgroundColor: "#fff",
+              borderTopWidth: 0,
+              height: 75,
+
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: -3,
+              },
+              shadowOpacity: 0.1,
+              shadowRadius: 3,
+              elevation: 5,
+            },
+            tabBarLabelStyle: {
+              fontSize: 12,
+              fontWeight: "600",
+            },
+          }}
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: "Home",
+
+              tabBarIcon: ({ focused, color, size }) => (
+                <Ionicons
+                  name={focused ? "home" : "home-outline"}
+                  size={size}
+                  color={color}
+                />
+              ),
+            }}
+          />
+
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: "Profile",
+
+              tabBarIcon: ({ focused, color, size }) => (
+                <Ionicons
+                  name={focused ? "person" : "person-outline"}
+                  size={size}
+                  color={color}
+                />
+              ),
+            }}
+          />
+
+          <Tabs.Screen
+            name="settings"
+            options={{
+              title: "Settings",
+
+              tabBarIcon: ({ focused, color, size }) => (
+                <Ionicons
+                  name={focused ? "settings" : "settings-outline"}
+                  size={size}
+                  color={color}
+                />
+              ),
+            }}
+          />
+        </Tabs>
+      );
+    }
+```
