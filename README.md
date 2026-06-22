@@ -89,6 +89,7 @@ npm run reset-project
 ```
     import { Image } from "react-native";
 ```
+
 ```
     <Image
       source={{
@@ -133,6 +134,7 @@ npm run reset-project
 ```
     import { Link } from "expo-router";
 ```
+
 ```
     <Link href={"/about"}>About Screen</Link>
 ```
@@ -236,6 +238,7 @@ npm run reset-project
 ```
 
 ## 3. about.tsx
+
 ```
     import { View, Text } from "react-native";
     import React from "react";
@@ -382,6 +385,7 @@ app/
 ```
 
 ## 4. Home Screen - app/(tabs)/index.tsx
+
 ```
     import { View, Text, StyleSheet } from "react-native";
 
